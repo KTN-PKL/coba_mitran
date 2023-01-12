@@ -13,6 +13,8 @@ use App\Http\Controllers\c_profil;
 use App\Http\Controllers\c_pembatalan;
 use App\Http\Controllers\c_tiket_masif;
 use App\Http\Controllers\invoice;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentCallbackController;
 
 
 /*
@@ -31,7 +33,8 @@ Route::get('/dashboard', [App\Http\Controllers\c_login::class, 'dashboard'] )->n
 Route::post('/check', [App\Http\Controllers\c_login::class, 'check'])->name('login.check');
 Route::post('/', [App\Http\Controllers\c_login::class, 'logout'])->name('user.logout');
 
-
+Route::resource('orders', OrderController::class)->only(['index', 'show']);
+Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
 
 
 
