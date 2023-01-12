@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('qty');
             $table->string('total_harga');
             $table->string('status');
+            $table->string('snap_token', 36)->nullable();
             $table->timestamps();
         });
     }

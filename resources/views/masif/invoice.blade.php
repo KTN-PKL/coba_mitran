@@ -84,7 +84,7 @@
             </div>
             <div class="mt-4" id="tombol_bayar">
                 <center>
-                    <input style="background-color: #2CF940;width:200px;" class="btn btn-success"  type="submit" value="Buat Invoice">
+                    <a style="background-color: #2CF940;width:200px;" class="btn btn-success"  type="submit" href="{{ route('invoice.store', $masif->id_masif) }}">Buat Invoice</a>
                 </center>
                
             </div>
