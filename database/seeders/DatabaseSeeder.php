@@ -32,6 +32,5 @@ class DatabaseSeeder extends Seeder
             'posisi' => 'Super Admin',
             
         ]);
-        \App\Models\Order::factory(10)->create();
     }
 }
