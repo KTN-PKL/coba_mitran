@@ -13,7 +13,6 @@ class invoice extends Controller
     {
         $this->pesan_masif = new pesan_masif();
         $this->pembayaran = new pembayaran();
-        $this->token = new CreateSnapTokenService();
     }
     public function store($id_masif)
     {
@@ -21,7 +20,8 @@ class invoice extends Controller
         $id_pembayaran = $id + 1;
         $masif = $this->pesan_masif->detailData($id_masif);
         $total = $masif->qty * $masif->harga;
-        $snapToken = $this->token->getSnapToken($id_masif, $id_pembayaran);
+        $midtrans = new CreateSnapTokenService($id_masif, $id_pembayaran);
+        $snapToken = $midtrans->getSnapToken();
         $data = [
             'id_pembayaran' => $id_pembayaran,
             'id_pengguna' => $masif->id_pengguna,
@@ -33,6 +33,6 @@ class invoice extends Controller
             'snap_token' => $snapToken,
         ];
         $this->pembayaran->addData($data);
-        return redirect()->route('masif');
+        return view('orders.show', $data);
     }
 }

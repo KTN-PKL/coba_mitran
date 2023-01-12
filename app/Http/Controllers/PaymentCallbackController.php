@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
+use App\Models\pembayaran;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Midtrans\CallbackService;
 
 class PaymentCallbackController extends Controller
 {
+    public function __construct()
+    {
+        $this->pembayaran = new pembayaran();
+    }
     public function receive()
     {
         $callback = new CallbackService;
@@ -18,21 +22,18 @@ class PaymentCallbackController extends Controller
             $order = $callback->getOrder();
 
             if ($callback->isSuccess()) {
-                Order::where('id', $order->id)->update([
-                    'payment_status' => 2,
-                ]);
+                $data = ['status' => "lunas"];
+                $this->pembayaran->editData($order->id, $data);
             }
 
             if ($callback->isExpire()) {
-                Order::where('id', $order->id)->update([
-                    'payment_status' => 3,
-                ]);
+                $data = ['status' => "kadaluarsa"];
+                $this->pembayaran->editData($order->id, $data);
             }
 
             if ($callback->isCancelled()) {
-                Order::where('id', $order->id)->update([
-                    'payment_status' => 4,
-                ]);
+                $data = ['status' => "batal"];
+                $this->pembayaran->editData($order->id, $data);
             }
 
             return response()

@@ -47,18 +47,14 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($order)
     {
-        $snapToken = $order->snap_token;
-        if (is_null($snapToken)) {
-            // Jika snap token masih NULL, buat token snap dan simpan ke database
 
             $midtrans = new CreateSnapTokenService($order);
             $snapToken = $midtrans->getSnapToken();
 
             $order->snap_token = $snapToken;
             $order->save();
-        }
 
         return view('orders.show', compact('order', 'snapToken'));
     }

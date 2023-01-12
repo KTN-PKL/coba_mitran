@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Order #{{ $order->number }}</title>
+    {{-- <title>Order #{{ $order->number }}</title> --}}
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -61,7 +61,7 @@
 
     <div class="container pb-5 pt-5">
         <div class="row">
-            <div class="col-12 col-md-8">
+            {{-- <div class="col-12 col-md-8">
                 <div class="card shadow">
                     <div class="card-header">
                         <h5>Data Order</h5>
@@ -95,18 +95,18 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-12 col-md-4">
                 <div class="card shadow">
                     <div class="card-header">
                         <h5>Pembayaran</h5>
                     </div>
                     <div class="card-body">
-                        @if ($order->payment_status == 1)
+                        {{-- @if ($order->payment_status == 1) --}}
                             <button class="btn btn-primary" id="pay-button">Bayar Sekarang</button>
-                        @else
+                        {{-- @else
                             Pembayaran berhasil
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
         payButton.addEventListener('click', function(e) {
             e.preventDefault();
 
-            snap.pay('{{ $snapToken }}', {
+            snap.pay('{{ $snap_token }}', {
                 // Optional
                 onSuccess: function(result) {
                     /* You may add your own js here, this is just example */
