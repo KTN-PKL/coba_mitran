@@ -96,7 +96,7 @@ class invoice extends Controller
             'snap_token' => $midtrans,
         ];
         $this->pembayaran->addData($data);
-        return view('orders.show', $data);
+        return view('invoice.show', $data);
     }
     public function callback(Request $request)
     {
